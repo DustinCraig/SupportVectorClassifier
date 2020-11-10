@@ -49,17 +49,20 @@ tuned_parameters = [
     },
     {
         'kernel': ['rbf'], 
-        'C': [0.5, 1, 10, 100, 1000]
+        'C': [0.5, 1, 10, 100, 1000],
+        'gamma': [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-2, 1e-1, 1],
     },
     {
         'kernel': ['poly'],
-        'degree': [1,2,3,4,5,6, 20, 50, 100],
-        'gamma': [1e-3, 1e-4, 1e-5],
+        'degree': [1, 2, 3, 4, 5, 6, 20, 50, 100],
+        'gamma': [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-2, 1e-1],
         'C': [0.5, 1, 10, 100, 1000]
     },
     {
         'kernel': ['sigmoid'],
-        'C': [0.5, 1, 10, 100, 1000]
+        'C': [0.5, 1, 10, 100, 1000],
+        'gamma': [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-2, 1e-1],
+
     }
 ]
 
@@ -67,7 +70,8 @@ tuned_parameters = [
 hypertuned_parameters = [
     {
         'kernel': ['rbf'],
-        'C': [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        'C': [1,2,3,4,5,6],
+        'gamma': [1e-3, 1e-4, 1e-5, 1e-6, 1e-7, 1e-2, 1e-1, 0, 1, 2, 3],
     }
 ]
 
@@ -137,7 +141,7 @@ print("PCA Components")
 print(abs(pca.components_))
 
 h = 0.02
-clf = SVC(kernel='rbf', C=3)
+clf = SVC(kernel='rbf', C=1, gamma=0.01)
 clf.fit(X, Y)
 x_min, x_max = finalDf[finalDf.columns[0]].min() - 1, finalDf[finalDf.columns[0]].max() + 1
 y_min, y_max = finalDf[finalDf.columns[1]].min() - 1, finalDf[finalDf.columns[1]].max() + 1
@@ -149,5 +153,5 @@ pl.set_cmap('jet')
 pl.contourf(xx, yy, Z)
 pl.axis('tight')
 pl.scatter(X[X.columns[0]], X[X.columns[1]], c=Y)
-pl.title('2D PCA with hyper-parameters (rbf, C=3)')
+pl.title('2D PCA with hyper-parameters (rbf, C=1, gamma=0.01)')
 pl.show()
