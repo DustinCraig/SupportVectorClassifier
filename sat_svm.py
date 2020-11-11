@@ -9,12 +9,12 @@ from sklearn import svm, datasets
 from sklearn.model_selection import train_test_split 
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.svm import SVC
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-runGridSearch = False
+runGridSearch = True
 
 def warn(*args, **kwargs):
     pass
@@ -77,7 +77,6 @@ hypertuned_parameters = [
 ]
 
 # Best parameters: 
-# {'C': 150, 'degree': 1, 'gamma': 0.001, 'kernel': 'rbf'}
 
 
 print('# Performing Course Grid Search')
@@ -119,6 +118,10 @@ print("The scores are computed on the full evaluation set.")
 print()
 y_true, y_pred = y_test, clf.predict(x_test)
 print(classification_report(y_true, y_pred))
+print("Confusion Matrix")
+print(confusion_matrix(y_true, y_pred))
+print("Accuracy Score")
+print(accuracy_score(y_true, y_pred))
 
 # Perform Principal component analysis to get our data in 2-dimensions to be able to plot it
 pca = PCA(n_components=2)

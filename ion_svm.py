@@ -122,6 +122,10 @@ print("The scores are computed on the full evaluation set.")
 print()
 y_true, y_pred = y_test, clf.predict(x_test)
 print(classification_report(y_true, y_pred))
+print("Confusion Matrix")
+print(confusion_matrix(y_true, y_pred))
+print("Accuracy Score")
+print(accuracy_score(y_true, y_pred))
 
 # Perform Principal component analysis to get our data in 2-dimensions to be able to plot it
 pca = PCA(n_components=2)
